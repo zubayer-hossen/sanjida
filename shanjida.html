@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZUBAYER</title>
+    <style>
+        /* Ensure the image is responsive */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Set the container to be responsive */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+       
+    </style>
+</head>
+<body>
+
+    <img src="https://i.ibb.co/yfHzwKX/sanjucat500x600.jpg" usemap="#image-map" alt="Sanjida">
+
+    <map name="image-map">
+        <area target="_blank" alt="Sanjida" title="Sanjida" href="https://drive.google.com/file/d/1xWK4idUxlGY9R7Z_94fV2dfs3kx0GBXr/view?usp=sharing" 
+        coords="243,409,260,371,295,365,310,386,309,406,300,417,291,430,279,437" 
+        shape="poly">
+    </map>
+
+    <script>
+        // Function to scale image map coordinates based on image size
+        function resizeMap() {
+            const img = document.querySelector('img[usemap]');
+            const width = img.naturalWidth;
+            const height = img.naturalHeight;
+            const newWidth = img.clientWidth;
+            const newHeight = img.clientHeight;
+
+            const areas = document.querySelectorAll('area');
+            areas.forEach(area => {
+                let coords = area.coords.split(',').map(Number);
+                for (let i = 0; i < coords.length; i += 2) {
+                    coords[i] = (coords[i] / width) * newWidth;
+                    coords[i + 1] = (coords[i + 1] / height) * newHeight;
+                }
+                area.coords = coords.join(',');
+            });
+        }
+
+        // Resize the map when the window is resized
+        window.addEventListener('resize', resizeMap);
+        window.addEventListener('load', resizeMap);
+    </script>
+</body>
+</html>
